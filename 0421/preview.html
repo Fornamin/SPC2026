@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>교실 자리 배치</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4c38a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 { margin: 20px; }
+
+button {
+    margin-bottom: 20px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #4a6cf7;
+    color: white;
+    cursor: pointer;
+}
+
+/* =========================
+   교실 (확대됨)
+========================= */
+.classroom {
+    position: relative;
+    width: 1200px;
+    height: 650px;
+    background: linear-gradient(#ffe0b3 40%, #d89b5b 40%);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* 바닥 */
+.floor {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60%;
+    background: repeating-linear-gradient(
+        90deg,
+        #c68642,
+        #c68642 40px,
+        #b97733 40px,
+        #b97733 80px
+    );
+}
+
+/* 칠판 */
+.board {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 520px;
+    height: 140px;
+    background: #2f6b3f;
+    border: 8px solid #8b5a2b;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.board-title {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* 창문 */
+.window {
+    position: absolute;
+    top: 30px;
+    width: 100px;
+    height: 80px;
+    background: #dbeeff;
+    border: 6px solid #c97a3a;
+    border-radius: 6px;
+}
+
+/* =========================
+   좌석 (축소 + 안정화)
+========================= */
+.seat {
+    position: absolute;
+    width: 85px;
+    height: 60px;
+    cursor: grab;
+}
+
+.desk {
+    width: 85px;
+    height: 35px;
+    background: #f3d6a4;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.label {
+    width: 85px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    background: rgba(255,255,255,0.85);
+    border-radius: 0 0 6px 6px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+</style>
+</head>
+
+<body>
+
+<h1>🏫 교실 자리 배치</h1>
+<button onclick="shuffleSeats()">자리 섞기</button>
+
+<div class="classroom" id="classroom">
+
+    <div class="board">
+        <div class="board-title">교실 자리 배치</div>
+    </div>
+
+    <div class="window" id="win1"></div>
+    <div class="window" id="win2"></div>
+
+    <div class="floor"></div>
+</div>
+
+<script>
+
+/* =========================
+   2 / 3 / 2 분단 구조
+========================= */
+const seatMap = [
+ ["이민지", "채란", "이태경", "심정호", "X", "X", "X"],
+    ["박준하", "박초롱", "김유신", "이종혁", "김민정A", "유지산", "X"],
+    ["한은태", "김선희", "조용민", "박상우", "진미경", "한혜경", "X"],
+    ["산혜진", "원가희", "박은빈", "박지우", "김민정B", "김성호", "권태현"],
+    ["황동건", "이상욱", "최준호", "이서우", "박지우", "김은결", "조윤"]
+];
+
+/* 분단 간격 */
+const groupGap = [0, 40, 40];
+
+let dragged = null;
+
+/* =========================
+   창문 위치
+========================= */
+function positionWindows() {
+    const center = 1200 / 2;
+    const gap = 400;
+
+    document.getElementById("win1").style.left =
+        (center - gap - 100) + "px";
+
+    document.getElementById("win2").style.left =
+        (center + gap) + "px";
+}
+
+/* =========================
+   좌석 렌더
+========================= */
+function renderSeats() {
+    const room = document.getElementById("classroom");
+    document.querySelectorAll(".seat").forEach(e => e.remove());
+
+    const seatW = 95;
+    const startX = (1200 - (7 * seatW + groupGap[1] + groupGap[2])) / 2;
+
+    for (let r = 0; r < seatMap.length; r++) {
+
+        let y = 230 + r * 80;
+        let x = startX;
+
+        for (let c = 0; c < 7; c++) {
+
+            const name = seatMap[r][c];
+
+            const seat = document.createElement("div");
+            seat.className = "seat";
+
+            seat.style.left = x + "px";
+            seat.style.top = y + "px";
+
+            seat.dataset.r = r;
+            seat.dataset.c = c;
+
+            if (name === "X") {
+                seat.innerHTML = `
+                    <div class="desk" style="background:#ddd;"></div>
+                    <div class="label" style="opacity:0.3;">빈자리</div>
+                `;
+            } else {
+                seat.innerHTML = `
+                    <div class="desk"></div>
+                    <div class="label">${name}</div>
+                `;
+            }
+
+            addDrag(seat);
+            room.appendChild(seat);
+
+            x += seatW;
+
+            if (c === 1 || c === 4) x += groupGap[1];
+        }
+    }
+}
+
+/* =========================
+   드래그 교환
+========================= */
+function addDrag(el) {
+
+    el.draggable = true;
+
+    el.addEventListener("dragstart", () => {
+        dragged = { r: el.dataset.r, c: el.dataset.c };
+    });
+
+    el.addEventListener("dragover", e => e.preventDefault());
+
+    el.addEventListener("drop", () => {
+
+        const r1 = dragged.r, c1 = dragged.c;
+        const r2 = el.dataset.r, c2 = el.dataset.c;
+
+        let temp = seatMap[r1][c1];
+        seatMap[r1][c1] = seatMap[r2][c2];
+        seatMap[r2][c2] = temp;
+
+        renderSeats();
+    });
+}
+
+/* =========================
+   자리 섞기 (X 제외)
+========================= */
+function shuffleSeats() {
+    let arr = seatMap.flat().filter(v => v !== "X");
+    arr.sort(() => Math.random() - 0.5);
+
+    let i = 0;
+    for (let r = 0; r < seatMap.length; r++) {
+        for (let c = 0; c < seatMap[r].length; c++) {
+            if (seatMap[r][c] !== "X") {
+                seatMap[r][c] = arr[i++];
+            }
+        }
+    }
+
+    renderSeats();
+}
+
+/* =========================
+   init
+========================= */
+positionWindows();
+renderSeats();
+
+</script>
+
+</body>
+</html>
