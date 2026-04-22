@@ -21,14 +21,12 @@ button {
     padding: 10px 18px;
     border: none;
     border-radius: 8px;
-    background: #4a6cf7;
+    background: #2f6b3f;
     color: white;
     cursor: pointer;
 }
 
-/* =========================
-   교실 (확대됨)
-========================= */
+/* 교실 */
 .classroom {
     position: relative;
     width: 1200px;
@@ -86,9 +84,7 @@ button {
     border-radius: 6px;
 }
 
-/* =========================
-   좌석 (축소 + 안정화)
-========================= */
+/* 좌석 */
 .seat {
     position: absolute;
     width: 85px;
@@ -121,13 +117,13 @@ button {
 
 <body>
 
-<h1>🏫 교실 자리 배치</h1>
+<h1>2026 SPC</h1>
 <button onclick="shuffleSeats()">자리 섞기</button>
 
 <div class="classroom" id="classroom">
 
     <div class="board">
-        <div class="board-title">교실 자리 배치</div>
+        <div class="board-title">🏫 교실 자리 배치</div>
     </div>
 
     <div class="window" id="win1"></div>
@@ -138,9 +134,7 @@ button {
 
 <script>
 
-/* =========================
-   2 / 3 / 2 분단 구조
-========================= */
+/* 좌석 */
 const seatMap = [
  ["이민지", "채란", "이태경", "심정호", "X", "X", "X"],
     ["박준하", "박초롱", "김유신", "이종혁", "김민정A", "유지산", "X"],
@@ -154,9 +148,7 @@ const groupGap = [0, 40, 40];
 
 let dragged = null;
 
-/* =========================
-   창문 위치
-========================= */
+/* 창문 */
 function positionWindows() {
     const center = 1200 / 2;
     const gap = 400;
@@ -168,9 +160,7 @@ function positionWindows() {
         (center + gap) + "px";
 }
 
-/* =========================
-   좌석 렌더
-========================= */
+/* 좌석 랜더 */
 function renderSeats() {
     const room = document.getElementById("classroom");
     document.querySelectorAll(".seat").forEach(e => e.remove());
@@ -218,9 +208,7 @@ function renderSeats() {
     }
 }
 
-/* =========================
-   드래그 교환
-========================= */
+/* 수동 배치 */
 function addDrag(el) {
 
     el.draggable = true;
@@ -244,9 +232,7 @@ function addDrag(el) {
     });
 }
 
-/* =========================
-   자리 섞기 (X 제외)
-========================= */
+/* 자리 섞기 */
 function shuffleSeats() {
     let arr = seatMap.flat().filter(v => v !== "X");
     arr.sort(() => Math.random() - 0.5);
@@ -263,9 +249,7 @@ function shuffleSeats() {
     renderSeats();
 }
 
-/* =========================
-   init
-========================= */
+/* init */
 positionWindows();
 renderSeats();
 
