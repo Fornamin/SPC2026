@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>Title</title>
+    </head>
+    <body>
+        <div>
+            <h2>Login Form</h2>
+            <form method="GET" action="login.html">
+                <label>ID</label>
+                <input for="userName" type="text" id="userName" name="id"><br>
+
+                <label>Password</label>
+                <input for="password" type="password" id="password" name="pw">
+
+                <input type="submit" value="Login">
+            </form>
+        </div><hr>
+        <div>
+            <h2>Search</h2>
+            <form method="GET" action="search">
+                <label for="query">Search</label>
+                <input type="search" name="q" id="query">
+                <input type="submit" value="search">
+            </form>
+        </div><hr>
+        <div>
+            <h2>What subject do you want to learn?</h2>
+            <input type="radio" name="과목" value="국어">국어            
+            <input type="radio" name="과목" value="수학">수학
+            <input type="radio" name="과목" value="영어">영어
+            <input type="radio" name="과목" value="과학">과학
+            <input type="radio" name="과목" value="사회">사회
+        </div><br>
+        <div>
+            <h2>What do you want to drink?</h2>
+            <input type="checkbox" name="과목" value="option1">아메리카노        
+            <input type="checkbox" name="과목" value="option2">카페 라떼
+            <input type="checkbox" name="과목" value="option3">카라멜 마키아또
+            <input type="checkbox" name="과목" value="option4">아이스티
+            <input type="checkbox" name="과목" value="option5">유자차
+        </div><hr>
+        <div>
+            <h2>Pull-Down Menu</h2>
+            <select multiple size="4">
+                <option>콜라</option>                
+                <option>사이다</option>                
+                <option>웰치스</option>                
+                <option>피크닉</option>                
+                <option>밀키스</option>                
+                <option>생수</option>        
+            </select>
+        </div><hr>
+        <div>
+            <h2>Progress Bar</h2>
+            <progress value="0" max="100" style="width: 30%; height: 10%;"></progress><br>            
+            <progress value="50" max="100" style="width: 30%; height: 10%;"></progress><br>       
+            <progress value="100" max="100" style="width: 30%; height: 10%;"></progress><br>
+        </div>
+    </body>
+</html>
