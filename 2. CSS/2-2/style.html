@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Document</title>
+        <style>
+            /*
+                1. (inline) > #id > .class > tag
+                2. 같은 계층 내에서는 순서대로 실행된다
+                밑으로 가면서 실행되기 때문에 덮어씌워짐
+            */
+
+            .my_background_orange {
+                width: 50%;
+                border: 2px dashed;
+                border-radius: 10%;
+                background-color: orange;
+            }
+
+            .my_background_beige {
+                width: 30%;
+                border: 1px solid red;
+                background-color: beige;
+            }
+
+            .my_background_yellow {
+                width: 40%;
+                border: 10px ridge;
+                background-color: yellow;
+            }
+
+            .my_text_brown {
+                color: brown;
+            }
+
+            .my_text_green {
+                color: green;
+            }
+
+            p {
+                color: blueviolet;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>CSS Practice</h1>
+        <p class="my_background_beige">Night time, My time</p>        
+        <p class="my_background_orange my_text">Loveless</p>        
+        <p class="my_background_orange">Love is everywhere</p>        
+        <p class="my_background_yellow">ID attack</p>    
+    </body>
+</html>

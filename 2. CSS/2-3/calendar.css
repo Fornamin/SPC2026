@@ -1,0 +1,46 @@
+* {
+    text-align: center;
+}
+
+img {
+    width: 100%;
+    padding: 0%;
+    margin: 0%;
+}
+
+.sat {
+    color: rgb(25, 0, 255);
+}
+
+.sun {
+    color: rgb(183, 6, 6);
+}
+
+#calendar {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/*
+id를 사용해서 색을 바꿨는데 더 나은 방법
+
+1. 캘린더의 th와 td의 첫 번째 요소들을 지정
+#calendar th:first-child, #calendar td:first-child {
+    color: red;
+}
+
+2. 캘린더의 모든 열의 첫 번째 요소들을 지정
+#calendar tr > *:first-child {
+    color: red;
+}
+*/
+
+#calender tr th, td {
+    font-size: larger;
+    width: 14%;
+}
+#calendar tr td {
+    height: 75px;
+    border: 1px solid rgb(124, 124, 124);
+    border-collapse: collapse;
+}
