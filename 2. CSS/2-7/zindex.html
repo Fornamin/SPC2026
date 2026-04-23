@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: relative;
+            width: 400px;
+            height: 90px;
+            color: white;
+        }
+        .div1 {
+            background-color: orange;
+            z-index: 4;
+
+        }
+        .div2 {
+            background-color: blue;
+            z-index: 3;            
+            /* bottom: 50px; */
+        }
+        .div3 {
+            background-color: red;            
+            z-index: 2;
+            /* bottom: 100px; */
+        }
+        .div4 {
+            background-color: green;            
+            z-index: 1;
+            /* bottom: 150px; */
+        }
+    </style>
+</head>
+<body>
+    <h1>Index 우선 순위</h1>
+    <div class="div1">Orange</div>
+    <div class="div2">Blue</div>
+    <div class="div3">Red</div>
+    <div class="div4">Green</div>
+</body>
+</html>

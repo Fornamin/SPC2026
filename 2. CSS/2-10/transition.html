@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .square {
+            width: 100px;
+            height: 100px;
+            background-color: navy;
+
+            transition-property: width, height;
+            transition-duration: 0.5s;
+            transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .square:hover {
+            width: 150px;
+            height: 150px;
+        }
+
+        button {
+            color: blueviolet;
+            transition-property: color;
+            transition-duration: 2s;
+        }
+
+        button:hover {
+            color: aquamarine;
+        }
+
+        img {
+            width: 300px;
+
+            transition-property: transform;
+            transition-duration: 4s;
+        }
+
+        img:hover {
+            transform: rotate(100deg);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="square"></div><br><hr><br>
+    <button>버튼</button><br><hr><br>
+    <img src="../img/logo.png">
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .bg {
+            height: 200px;
+            background-color: rgb(114, 192, 68);
+        }
+        .bg-center {
+            background-color: orange;
+        }
+        .fixed {
+            width: 100px;
+            height: 150px;
+            background-color: blue;
+            background-image: url(../img/logo.png);
+            background-size: 100% 100%;
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">hello</div>
+    <div class="bg-center">hello</div>
+    <div class="bg">hello</div>
+    <div class="fixed">hello</div>
+    <script>
+        const element = document.querySelector('.fixed');
+        element.onclick = () => {
+            element.style.transform =
+                element.style.transform === 'scale(0.2)'
+                    ? 'scale(1)'
+                    : 'scale(0.2)';
+        }
+    </script>
+</body>
+</html>
