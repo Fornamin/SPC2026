@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body class="p-4">
+    <section mb="5">
+        <h4> 1. d-* Class</h4>
+        <div class="d-block">d-block</div>
+        <div class="d-block border m-2">d-block</div>
+        <div class="d-block border bg-dark text-white">d-block</div>
+        <div class="d-inline">d-inline</div>
+        <div class="d-inline">d-inline</div>
+    </section>
+
+    <section mb="5">
+        <h4> 2. Visible Class</h4>
+        <div class="bg-success text-white">backback</div>
+        <div class="bg-success text-white">backback</div>
+    </section>
+
+    <section mb="5">
+        <h4> 3. Display 반응형 조정</h4>
+        <div class="d-none">안 보여요</div>
+        <div class="d-sm-block d-none">작으면 안 보여요 (576px)</div>
+        <div class="d-lg-block d-none">작으면 안 보여요 (982px)</div>
+    </section>
+
+    <section mb="5">
+        <h4> 4. Flex Layout</h4>
+        <div class="d-flex mb-2">
+            <div class="bg-primary text-white p-2">Class Item</div>
+            <div class="bg-secondary text-white p-2">Class Item</div>
+            <div class="bg-info text-white p-2">Class Item</div>
+        </div>
+
+        <div class="bg-primary text-white p-2">Class Item</div>
+        <div class="bg-secondary text-white p-2">Class Item</div>
+        <div class="bg-info text-white p-2">Class Item</div>
+    </section>
+
+    <section mb="5">
+        <h4> 5. Grid Layout</h4>
+        <div class="d-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="bg-success">Element1</div>
+            <div class="bg-danger">Element2</div>
+            <div class="bg-info">Element3</div>
+            <div class="bg-primary">Element4</div>
+            <div class="bg-secondary">Element5</div>
+            <div class="bg-warning">Element6</div>
+        </div>
+    </section>
+
+</body>
+
+</html>
