@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="CSS/modal.css">
+</head>
+
+<body>
+    <h1>Welcome to my page</h1>
+    <p>introduce</p> <p>introduce</p> <p>introduce</p> <p>introduce</p>
+    <button id="modal-open-btn" onclick="modal_open()">Open Modal</button>
+
+    <!-- <div class="modal-wrapper" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-title">Hello</div>
+            <p>모달에 들어갈 내용을 작성</p>
+            <div class="close-modal-wrapper">
+                <button id="modal-close-btn" onclick="">Close</button>
+            </div>
+        </div>
+    </div> -->
+    <script>
+        const open_btn = document.getElementById('modal-open-btn');
+        const close_btn = document.getElementById('modal-close-btn');
+        const modal = document.querySelector('.modal-wrapper');
+
+        open_btn.onclick = () => {
+            const modalWrapper = document.createElement('div');
+            modalWrapper.className = 'modal-wrapper';
+            modalWrapper.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-title">Hello</div>
+                <p>모달에 들어갈 내용을 작성</p>
+                <div class="close-modal-wrapper">
+                <button id="modal-close-btn" onclick="">Close</button>
+                </div>
+            </div>`
+            // body의 맨끝에 추가함
+            document.body.appendChild(modalWrapper);
+
+            // 닫기 버튼에 이벤트 붙이기
+            // 작동 안 해서 수정 필요
+            document.getElementById('modal-close-button').onclick = () => {
+                modalWrapper.remove();
+            }
+
+            modal.style.display = 'flex';
+        }
+        close_btn.onclick = () => {
+            modal.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

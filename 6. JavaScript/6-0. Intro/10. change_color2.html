@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="bg">
+    <h1 id="text">Change Color Button</h1>
+    <button onclick="changeColor()">Change</button>
+    <script>
+        const colors = ['red', 'blue', 'green', 'orange', 'pink', 'yellow'];
+        let index = 0;
+
+        function changeColor() {
+            // 3가지 색으로 변경
+            const bg = document.getElementById('bg');
+
+            bg.style.backgroundColor = colors[index];
+            index = (index + 1) % colors.length;
+
+            // switch (bg.style.backgroundColor) {
+            //     case colors[0]:
+            //         bg.style.backgroundColor = colors[1];
+            //         break;
+            //     case colors[1]:
+            //         bg.style.backgroundColor = colors[2];
+            //         break;
+            //     case colors[2]:
+            //         bg.style.backgroundColor = colors[0];
+            //         break;
+            //     default:
+            //         bg.style.backgroundColor = colors[0];
+            //         break;
+            // }
+        }
+    </script>
+</body>
+</html>

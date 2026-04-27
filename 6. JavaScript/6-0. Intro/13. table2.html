@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table id="table01">
+        <tr>
+            <td>shell</td>            
+            <td>shell</td>            
+            <td>shell</td>
+        </tr>
+        <tr>
+            <td>shell</td>            
+            <td>shell</td>            
+            <td>shell</td>
+        </tr>
+        <tr>
+            <td>shell</td>            
+            <td>shell</td>            
+            <td>shell</td>
+        </tr>
+    </table><br>
+    <table id="table02">
+        <tr>
+            <td>shell</td>            
+            <td>shell</td>  
+        </tr>
+        <tr>
+            <td>shell</td>            
+            <td>shell</td>  
+        </tr>
+    </table><br>
+    <button onclick="changeOddCells()">Odd Num</button>
+    <button onclick="changeEvenCells()">Even Num</button>
+    <script>
+        function changeOddCells() {
+            const table = document.getElementById('table01');
+            const cells = table.getElementsByTagName('td');
+
+            for (let i = 0; i < cells.length; i++) {
+                if (i % 2 == 0) {
+                    cells[i].style.backgroundColor = 'orange';
+                }
+            }
+        }
+
+        function changeEvenCells() {
+            // CSS 태그 형태로 원하는 것을 찾을 수 있음
+            const cells = document.querySelectorAll('#table02 td');
+            cells.forEach((cell, index) => {
+                if (index % 2 != 0) {
+                    cell.style.backgroundColor = 'pink';
+                }
+            })
+        }
+    </script>
+</body>
+</html>
