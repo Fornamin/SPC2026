@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구구단</title>
+</head>
+<body>
+    <h1>구구단 출력기</h1>
+    <input id="input" type="text" placeholder="단을 입력하세요">
+    <button onclick="printGugudan()">print</button>
+    <div id="output">
+        <!-- 결과가 출력되는 곳 -->
+    </div>
+    <script>
+        function printGugudan() {
+            // console.log("Button Clicked");
+            const output = document.getElementById('output');
+
+            // 1-1. 입력값 가져오기
+            const input = document.getElementById('input').value; // DOM이 반환됨 -> .value를 붙여야 함
+            const parsedInput = parseInt(input);
+
+            // 1-2. 입력값 검증
+            // 숫자인지 확인
+            if (isNaN(input)) {
+                output.innerHTML = '<h3>잘못된 형식입니다<br>숫자를 입력해주세요</h3>';
+                return;
+            }
+            // 범위 체크
+            if (parsedInput < 1 || parsedInput > 9) {
+                output.innerHTML = '<h3>잘못된 범위입니다<br>1부터 9까지의 숫자를 입력해주세요</h3>';
+                return;
+            }
+
+            // 2. 구구단 출력
+            // InnerHTML: HTML 값을 파싱할 수 있도록 출력
+            output.innerHTML = '<h3>' + input + '단</h3';
+            for (let i = 1; i <= 9; i++) {
+                output.innerHTML += `${input} X ${i} = ${(input * i)}<br>`;
+            }
+        }
+    </script>
+</body>
+</html>

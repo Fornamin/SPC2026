@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="myHeading" style="color: red;">Heading</h1>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea quos, eveniet numquam nobis quidem deserunt debitis beatae! Quisquam non iusto, maxime impedit dolorem ad, alias aut sunt aperiam atque provident.</p>
+    <button onclick="changeHeaderColor()">Action Btn1</button>
+    <script>
+        function changeHeaderColor() {
+            const myHeading = document.getElementById('myHeading');
+            console.log(myHeading);
+            myHeading.textContent = "Changed Heading";
+            myHeading.style.color = 'blue';
+            myHeading.style.backgroundColor = 'yellow';
+            myHeading.style.width = '300px';
+        }
+    </script>
+</body>
+</html>

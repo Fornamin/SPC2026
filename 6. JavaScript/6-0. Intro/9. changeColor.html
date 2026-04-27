@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="bg">
+    <h1 id="text">Change Color Button</h1>
+    <button onclick="changeColor()">Change</button>
+    <script>
+        function changeColor() {
+            const bg = document.getElementById('bg');
+
+            if (bg.style.backgroundColor == 'red')
+                bg.style.backgroundColor = 'white';
+            else 
+                bg.style.backgroundColor = 'red';
+        }
+    </script>
+</body>
+</html>

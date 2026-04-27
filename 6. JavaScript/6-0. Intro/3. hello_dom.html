@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>27th April, 2026</h1>        
+        <p>Sentence 1</p>
+    <div id="output">
+        <!-- 동적으로 컨텐츠로 채울 곳-->
+    </div>        
+    <p>Sentence 2</p>
+    <button onclick="sayHello()">My Btn</button>
+    <script>
+        function sayHello() {
+            console.log('Say Hello');
+            const myOutput = document.getElementById('output');
+            console.log(myOutput); // div부터 통째로 들어간다
+            myOutput.textContent = '나의 새로운 동적 문장';
+        }
+
+    </script>
+</body>
+</html>
