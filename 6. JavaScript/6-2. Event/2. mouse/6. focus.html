@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="id" placeholder="Enter your ID">
+    <input type="pw" id="pw" placeholder="Enter your PW">
+
+    <script>
+        document.getElementById('id').addEventListener('focus', () => {
+            console.log('ID창 활성화');
+        });
+
+        document.getElementById('id').addEventListener('blur', () => {
+            console.log('ID창 비활성화');
+        });
+        document.getElementById('pw').addEventListener('focus', () => {
+            console.log('PW창 활성화');
+        });
+
+        document.getElementById('pw').addEventListener('blur', () => {
+            console.log('PW창 비활성화');
+        });
+    </script>
+</body>
+</html>

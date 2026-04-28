@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #dropZone {
+            width: 300px;
+            height: 200px;
+            border: 2px dashed #3ab2ea;
+            display: flex;
+            justify-content: center;  /* 내부 텍스트 가로 가운데 */
+            align-items: center;      /* 내부 텍스트 세로 가운데 */
+            background-color: rgb(206, 210, 210);
+        }
+    </style>
+</head>
+<body>
+    <div class="" id="dropZone">Drag any file here</div><hr>
+    <div class="" id="fileList">
+        <h3>Dropped Files List</h3>
+        <ul id="fileNames"></ul>
+    </div>
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileName = document.getElementById('fileNames');
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.backgroundColor = 'red';
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.style.backgroundColor = 'blue';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.backgroundColor = 'green';
+
+            const files = e.dataTransfer.files;
+            // if (files.length > 0) {
+            //     Array.from(files).forEach((file) => {
+            //         const li = document.createElement('li');
+            //         li.textContent = file.name;
+            //         fileName.appendChild(li);
+            //     });
+            // }
+
+           [...files].forEach(file => {
+                const li = document.createElement('li');
+                li.textContent = file.name;
+                fileName.appendChild(li);
+           });
+        });
+    </script>
+</body>
+</html>

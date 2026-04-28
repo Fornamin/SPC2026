@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myForm" accept="/submit" method="post">
+        <textarea id="myTextArea" rows="10" cols="30"></textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        document.getElementById('myForm').addEventListener('keydown', (e) => {
+            if (e.shiftKey && e.key === 'Enter')
+                document.getElementById('myForm').submit();
+        });
+    </script>
+</body>
+</html>

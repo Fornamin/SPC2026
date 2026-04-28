@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Access to Webcam</h1>
+    <video id="webcam" autoplay playsinline></video>
+    <p id="error"></p>
+
+    <script>
+        const video = document.getElementById('webcam');
+        const error = document.getElementById('error');
+
+        navigator.mediaDevices.getUserMedia({video: true}).then(stream => {
+            video.srcObject = stream;
+        }).catch(error => {
+            error.textContent = `Error: ${error.message}`;
+        });
+    </script>
+</body>
+</html>

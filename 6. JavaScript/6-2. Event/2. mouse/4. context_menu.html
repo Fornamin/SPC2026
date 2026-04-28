@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myBtn {
+            width: 200px;
+            height: 150px;
+            background-color: rgb(11, 101, 228);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="myBtn">Click it!</div>
+    <script>
+        // 특정 요소만 적용
+        document.getElementById('myBtn').addEventListener('contextmenu', (ev) => {
+            ev.preventDefault(); // 기본 기능을 하지 못하게 됨
+            console.log("우클릭 성공");
+        });
+
+        // 전체에 적용
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            alert('우클릭 X');
+        });
+    </script>
+</body>
+</html>

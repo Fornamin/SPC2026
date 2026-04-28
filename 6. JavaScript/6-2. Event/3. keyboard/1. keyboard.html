@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="myInput" placeholder="Press any key. . .">
+    <script>
+        const displayKey = document.getElementById('displayKey');
+
+        document.getElementById('myInput').addEventListener('keydown', (e) => {
+            console.log('pressed key[down]: ', e.key);
+        });
+        document.getElementById('myInput').addEventListener('keyup', (e) => {
+            console.log('pressed key[up]: ', e.key);
+        });
+    </script>
+</body>
+</html>

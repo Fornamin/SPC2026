@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myBtn {
+            width: 300px;
+            height: 150px;
+            background-color: rgb(215, 243, 103);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="myBtn">Put your mouse on the box</div>
+    <script>
+        document.getElementById('myBtn').addEventListener('mouseover', () => {
+            console.log('mouse down');
+        });
+        document.getElementById('myBtn').addEventListener('mouseout', () => {
+            console.log('mouse out');
+        });
+        document.getElementById('myBtn').addEventListener('mousemove', (e) => {
+            console.log(`${e.clientX}, ${e.clientY}`);
+        });
+    </script>
+</body>
+</html>

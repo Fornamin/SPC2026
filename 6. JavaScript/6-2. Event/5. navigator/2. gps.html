@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Browser Info</h1>
+    <p>Location: <span id="geoLoc"></span></p>    
+    <button id="getGeoBtn">위치 정보 조회</button>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('getGeoBtn').addEventListener('click', () => {
+            console.log('geo');
+            navigator.geolocation.getCurrentPosition((position) => {
+                const {latitude, longitude} = position.coords;
+                document.getElementById('geoLoc').textContent =
+                    `위도: ${latitude}, 경도: ${longitude}`;
+            });
+        });
+    });
+</script>
+</body>
+</html>

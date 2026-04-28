@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #sizeInfo {
+            font-size: 24px;
+            line-height: 1.6;
+            background-color: rgb(223, 223, 223);
+            padding: 15px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Window and Screen Info</h1>
+    <div class="" id="sizeInfo"></div>
+    <script>
+        function updateWindowInfo() {
+            const innerWidth = window.innerWidth;
+            const innerHeight = window.innerHeight;
+
+            const outerWidth = window.outerWidth;
+            const outerHeight = window.outerHeight;
+
+            const screenWidth = screen.width;
+            const screenHeight = screen.height;
+
+            const sizeInfo = document.getElementById('sizeInfo');
+            sizeInfo.innerHTML = `
+                <strong>Viewport = window.inner</strong><br>
+                Width: ${innerWidth}px <br>
+                Height: ${innerHeight}px <br><br>
+                <strong>Browser size = window.outer</strong><br>
+                Width: ${outerWidth}px <br>
+                Height: ${outerHeight}px <br><br>    
+                <strong>Screen resolution</strong><br>
+                Width: ${screenWidth}px <br>
+                Height: ${screenHeight}px
+                `;
+        };
+        
+        window.addEventListener('load', () => {
+            setTimeout(updateWindowInfo, 50);
+        });
+
+        window.addEventListener('resize', updateWindowInfo);
+    </script>
+</body>
+</html>

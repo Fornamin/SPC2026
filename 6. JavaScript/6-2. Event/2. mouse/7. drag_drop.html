@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #dragItem {
+            width: 100px;
+            height: 100px;
+            background-color: #ffcc00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .dropContainer {
+            width: 200px;
+            height: 200px;
+            background-color: #f0f0f0;
+            border: 2px dashed #cccccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .placeholder {
+            position: absolute;
+            color: #999;
+        }
+        </style>
+</head>
+<body>
+    <div class="dropContainer" id="startZone">
+        <span class="placeholder" id="startPlaceHolder">Drop here</span>
+        <div class="" id="dragItem" draggable="true">Drag me</div>
+    </div>
+    <div class="dropContainer" id="dropZone">
+        <span class="placeholder" id="dropPlaceHolder">Drop here</span>
+    </div>
+    <script>
+        const dragItem = document.getElementById('dragItem');
+        const dropZone = document.getElementById('dropZone');
+        const startZone = document.getElementById('startZone');
+
+        dragItem.addEventListener('dragstart', () => {
+            console.log("drag started");
+        });
+
+        [startZone, dropZone].forEach((zone) => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();            
+                console.log(`It is on the ${zone.id}`);
+            });
+        });
+
+        [startZone, dropZone].forEach((zone) => {
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.appendChild(dragItem);
+                console.log(`It is dropped on the ${zone.id}`);
+            });
+        });
+    </script>
+</body>
+</html>

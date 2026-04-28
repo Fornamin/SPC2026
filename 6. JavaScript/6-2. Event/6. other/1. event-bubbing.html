@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #grandParent {
+            padding: 50px;
+            background-color: pink;
+        }
+
+        #parent {
+            padding: 50px;
+            background-color: lightblue;
+        }
+        
+        #child {
+            padding: 50px;
+            background-color: lightgreen;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="" id="grandParent">GrandParent
+        <div class="" id="parent">Parent
+            <div class="" id="child">
+                Child
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const child = document.getElementById('child');
+            const parent = document.getElementById('parent');
+            const grandParent = document.getElementById('grandParent');
+
+            // 버블링으로 그 위의 요소들까지 함께 알림이 전달된다
+            child.addEventListener('click', (e) => {
+                alert('Child Clicked');
+                e.stopPropagation();
+            });
+            parent.addEventListener('click', (e) => {
+                alert('Parent Clicked');
+                e.stopPropagation();
+            });
+            grandParent.addEventListener('click', () => {
+                alert('GrandParent Clicked');
+            });
+        });
+    
+    </script>
+</body>
+</html>

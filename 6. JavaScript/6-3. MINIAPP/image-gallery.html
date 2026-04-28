@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Image Gallery</h1>
+    <div class="gallery">
+        <img src="img/pom1.png" height="150px" id="img1">
+        <img src="img/pom2.png" height="150px" id="img2">
+        <img src="img/pom3.png" height="150px" id="img3">
+    </div>
+    <hr>
+    <img src="img/pom1.png" id="lg-img">
+
+    <script>
+        [document.getElementById('img1'), 
+        document.getElementById('img2'), 
+        document.getElementById('img3')].forEach(img => {
+            img.addEventListener('click', () => {
+                const large = document.getElementById('lg-img');
+                large.src = img.src; large.height = '400'; large.style.display = 'block';
+            })
+        });
+    </script>
+</body>
+
+</html>

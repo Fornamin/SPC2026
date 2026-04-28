@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #sizeInfo {
+            font-size: 24px;
+            line-height: 1.6;
+            background-color: beige;
+            padding: 15px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Window Info</h1>
+    <div class="" id="sizeInfo"></div>
+    <script>
+        window.addEventListener('resize', (e) => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            console.log(`changed window size ${width}X${height}`);
+        })
+    </script>
+</body>
+</html>
