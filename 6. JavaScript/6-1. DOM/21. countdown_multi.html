@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>CountDown</h1>
+    <input type="number" id="timeInput" placeholder="Enter a number" min="1">
+    <button id="startBtn" onclick="startTimer()">Start</button>
+    <div id="timerContainer">
+    </div>
+
+    <script>
+        let timerId;
+
+        function startTimer() {
+            const sec = parseInt(document.getElementById('timeInput').value);
+            const timerContainer = document.getElementById('timerContainer');
+            let cnt = 0;
+            
+            // 원하는 새로운 DOM 요소 만들기
+            const timer = document.createElement('p');
+            timer.textContent = `${sec - cnt} sec`;
+
+            // 새로 만든 요소를 원하는 DIV에 추가함
+            timerContainer.appendChild(timer);
+
+            timerId = setInterval(() => {
+                timer.textContent = `${sec - cnt} sec`;
+                cnt++;
+                if (sec - cnt < 0) {
+                    clearInterval(timerId);
+                    timer.textContent = 'Timer is end';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

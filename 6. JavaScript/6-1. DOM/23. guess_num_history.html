@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #result {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guess Number Game</h1>
+    <h2>guess number which is from 1 to 100</h2>
+    <input type="number" id="guessNum" placeholder="Enter a number">
+    <button id="guessBtn" onclick="guessNum()">Guess</button>
+    <div class="" id="result"></div><br><hr>
+    <h2>History</h2>
+    <div class="" id="history"></div>
+    <script>
+        const result = document.getElementById('result');
+        const history = document.getElementById('history');
+        let randomNum = createRandomNum();
+        let cnt = 0;
+
+        function createRandomNum() {
+            const randomNum = Math.floor(Math.random() * 100) + 1;
+            return randomNum;
+        }
+
+        function guessNum() {
+            cnt++;
+
+            const inputNum = parseInt(document.getElementById('guessNum').value);
+            const historyNum = document.createElement('li');
+
+            historyNum.textContent = `${(cnt)}: ${inputNum}`;
+            history.appendChild(historyNum);
+            
+            if (inputNum > randomNum)
+                result.textContent = '입력한 숫자가 더 큽니다';
+            else if (inputNum < randomNum)
+                result.textContent = '입력한 숫자가 더 작습니다';
+            else if (inputNum == randomNum) {
+                result.textContent = `🎉CORRECT🎉You find the number by ${cnt} count`;
+                cnt = 0;
+                randomNum = createRandomNum();
+                history.innerHTML = '';
+            }
+            else
+                result.textContent = 'ERROR';
+        }
+
+        // 숙제
+        // 5글자 행맨 게임 만들기
+    </script>
+</body>
+</html>

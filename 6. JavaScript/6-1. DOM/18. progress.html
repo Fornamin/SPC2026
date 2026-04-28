@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #timeInput {
+            width: 200px;
+        }
+
+        #progressBar {
+            margin-top: 10px;
+            width: 305px;
+            height: 30px;
+            background-color: rgb(216, 219, 222);
+        }
+
+        #progress {
+            width: 0%;
+            height: 30px;
+            background-color: rgb(157, 236, 72);
+        }
+
+        #progressText {
+            position: absolute;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <input type="number" id="timeInput" placeholder="초를 입력하세요" min="1" max="60">
+    <button onclick="startProgress()" id="startBtn">Start</button>
+    <button onclick="clearProgress()" id="clearBtn">Clear</button>
+    <div class="" id="progressBar">
+        <div class="" id="progress">
+            <span id="progressText">0%</span>
+        </div>
+    </div>
+    <script>
+        let interval;
+        let timerId;
+
+        const timeInput = document.getElementById('timeInput');
+        const progress = document.getElementById('progress');
+        const progressText = document.getElementById('progressText');
+        const startBtn = document.getElementById('startBtn');
+        const clearBtn = document.getElementById('clearBtn');
+
+        function startProgress() {
+            startBtn.disabled = true;
+            duration = parseInt(timeInput.value);
+
+            let elapsed = 0;
+            timerId = setInterval(() => {
+                elapsed++;
+
+                const ratio = Math.floor((elapsed / duration) * 100);
+                progress.style.width = `${ratio}%`;
+                progressText.textContent = `${ratio}%`;
+
+                if (ratio >= 100) {
+                    // Stop the timer
+                    clearInterval(timerId);
+                    startBtn.disabled = false;
+                }
+            }, 1000);
+        }
+
+        function clearProgress() {
+            if (timerId) clearInterval(timerId);
+
+            progress.style.width = '0%';
+            timeInput.value = "";
+            progressText.textContent = '0%';
+        }
+    </script>
+</body>
+</html>

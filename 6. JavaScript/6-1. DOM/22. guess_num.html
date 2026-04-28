@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Guess Number Game</h1>
+    <h2>guess number which is from 1 to 100</h2>
+    <input type="number" id="guessNum" placeholder="Enter a number">
+    <button id="guessBtn" onclick="guessNum()">Guess</button>
+    <div class="" id="result"></div>
+    <script>
+        const randomNum = Math.floor(Math.random() * 100) + 1;
+        const result = document.getElementById('result');
+
+        function guessNum() {
+            const inputNum = parseInt(document.getElementById('guessNum').value);
+
+            if (inputNum > randomNum)
+                result.textContent = '입력한 숫자가 더 큽니다';
+            else if (inputNum < randomNum)
+                result.textContent = '입력한 숫자가 더 작습니다';
+            else if (inputNum == randomNum)
+                result.textContent = '🎉CORRECT🎉';
+            else
+                result.textContent = 'ERROR';
+        }
+    </script>
+</body>
+</html>

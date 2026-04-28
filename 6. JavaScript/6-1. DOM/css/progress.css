@@ -1,0 +1,22 @@
+#timeInput {
+    width: 200px;
+}
+
+#progressBar {
+    margin-top: 10px;
+    width: 305px;
+    height: 30px;
+    background-color: rgb(216, 219, 222);
+}
+
+#progress {
+    width: 0%;
+    height: 30px;
+    background: linear-gradient(to right, #eeff00, #88ff00);
+    transition: width 0.5s ease-out;
+}
+
+#progressText {
+    text-align: center;
+    width: 100%;
+}

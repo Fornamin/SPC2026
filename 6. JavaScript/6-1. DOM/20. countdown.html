@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>CountDown</h1>
+    <input type="number" id="timeInput" placeholder="Enter a number" min="1">
+    <button id="startBtn" onclick="startTimer()">Start</button>
+    <div class="">
+        <p id="timerDisplay">0 sec</p>
+    </div>
+
+    <script>
+        let timerId;
+        let cnt = 0;
+
+        function startTimer() {
+            // 1. 입력 값 가져오기
+            const sec = parseInt(document.getElementById('timeInput').value);
+            const sec_text = document.getElementById('timerDisplay');
+            
+            // 2.
+            timerId = setInterval(() => {
+                // 3. DOM(<p>)에 남은 시간 출력
+                sec_text.textContent = `${sec - cnt} sec`;
+                cnt++;
+
+                // 4. 만료되면 끝났다고 출력
+                if (sec - cnt < 0) {
+                    clearInterval(timerId);
+                    sec_text.textContent = 'Timer is end';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

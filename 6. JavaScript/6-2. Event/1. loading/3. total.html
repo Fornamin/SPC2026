@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 실행 순서: 0
+        console.log('Head Script');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const mytitle0 = document.getElementById('mytitle');
+            console.log('First try: ', mytitle0);
+        })
+    </script>
+</head>
+<body>
+    <script>
+        // 실행 순서: 1
+        console.log('First Body Script');
+
+        // null error
+        const myTitle1 = document.getElementById('title');
+        console.log("Second try: ", myTitle1);
+    </script>
+
+    <h1 id="title">My Title</h1>
+
+    <script>        
+        const myTitle2 = document.getElementById('title');
+        console.log("Third try: ", myTitle2);
+
+        window.onload = function() {
+            // 실행 순서: 4
+            console.log('All resources(CSS, Image, Js, HTML) are loaded');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 실행 순서: 3
+            console.log('DOM Loaded');
+        });
+        // 실행 순서: 2
+        console.log('Second Body Script');
+    </script>
+</body>
+</html>

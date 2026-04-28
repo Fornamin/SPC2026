@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myBtn {
+            width: 200px;
+            height: 150px;
+            background-color: rgb(11, 101, 228);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="myBtn">Click it!</div>
+    <script>
+        document.getElementById('myBtn').addEventListener('mousedown', (e) => {
+            // 누르자마자 실행
+            console.log('mouse down', e);
+            switch(e.button) {
+                case 0:
+                    console.log("left btn");
+                    break;
+                case 1:
+                    console.log("middle btn");
+                    break;
+                case 2:
+                    console.log("right btn");
+                    break;
+                default:
+                    console.log("unknown btn / ", e.button);
+            }
+        });
+
+        // 눌렀다 뗄 때 실행
+        document.getElementById('myBtn').addEventListener('click', (e) => {
+            console.log('clicked', e);
+        });
+    </script>
+</body>
+</html>
