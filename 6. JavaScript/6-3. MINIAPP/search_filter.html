@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Filter</title>
+    <style>
+        h1 {
+            margin-left: 30px;
+        }
+
+        input {
+            width: 500px;
+            margin-left: 30px;
+            padding: 15px;
+            font-size: 20px;
+            border: none;
+            background-color: #ededed;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            display: none;
+            padding: 5px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Real-time Search Filter</h1>
+    <input type="text" id="searchInput" placeholder="search . . .">
+    <ul id="itemList">
+        <li>apple</li>
+        <li>banana</li>
+        <li>grape</li>
+        <li>orange</li>
+        <li>kiwi</li>
+        <li>mango</li>
+        <li>peach</li>
+        <li>pineapple</li>
+        <li>watermelon</li>
+        <li>melon</li>
+        <li>blueberry</li>
+        <li>strawberry</li>
+        <li>pear</li>
+        <li>lemon</li>
+        <li>cherry</li>
+        <li>plum</li>
+        <li>apricot</li>
+        <li>durian</li>
+        <li>jackfruit</li>
+        <li>starfruit</li>
+        <li>longan</li>
+        <li>rambutan</li>
+        <li>soursop</li>
+        <li>mulberry</li>
+        <li>boysenberry</li>
+        <li>elderberry</li>
+        <li>gooseberry</li>
+        <li>huckleberry</li>
+        <li>salak</li>
+        <li>sapodilla</li>
+        <li>tamarind</li>
+        <li>ugli fruit</li>
+        <li>yuzu</li>
+        <li>feijoa</li>
+        <li>jabuticaba</li>
+        <li>miracle fruit</li>
+        <li>ackee</li>
+        <li>bilberry</li>
+        <li>currant</li>
+        <li>damson</li>
+        <li>loquat</li>
+        <li>medlar</li>
+        <li>quince</li>
+        <li>rowan</li>
+        <li>serviceberry</li>
+        <li>santol</li>
+        <li>langsat</li>
+        <li>fig</li>
+        <li>pomegranate</li>
+        <li>papaya</li>
+        <li>guava</li>
+        <li>lychee</li>
+        <li>passionfruit</li>
+        <li>dragonfruit</li>
+        <li>coconut</li>
+        <li>blackberry</li>
+        <li>raspberry</li>
+        <li>cranberry</li>
+        <li>persimmon</li>
+        <li>date</li>
+        <li>nectarine</li>
+        <li>tangerine</li>
+        <li>grapefruit</li>
+        <li>kumquat</li>
+    </ul>
+    <script>
+        // refactoring
+        const input = document.getElementById('searchInput');
+        const items = document.querySelectorAll('li');
+
+        input.addEventListener('input', () => {
+            const keyword = input.value.toLowerCase();
+
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+
+                if (text.startsWith(keyword) && keyword !== '') {
+                    item.style.display = 'block';
+
+                    const match = item.textContent.slice(0, keyword.length);
+                    const rest = item.textContent.slice(keyword.length);
+
+                    item.innerHTML = `<strong>${match}</strong>${rest}`;
+                } else if (keyword === '') {
+                    item.style.display = 'none';
+                    item.innerHTML = item.textContent;
+                } else {
+                    item.style.display = 'none';
+                    item.innerHTML = item.textContent;
+                }
+            });
+        });
+        // 실시간 검색 필터
+        // const words = document.querySelectorAll('li');
+        // let word = '';
+        // let idx = 0;
+
+        // // 1. 이벤트를 등록한다(키보드 관련)
+        // document.getElementById('searchInput').addEventListener('keyup', (e) => {
+        //     if (e.key == 'Backspace') {
+        //         if (word.length == 0)
+        //             return;
+        //         word = word.slice(0, word.length - 1);
+        //         idx = idx - 2;
+        //     } else {
+        //         if (e.key.slice(0, 7) == 'Process') {
+        //             // 한글 무시
+        //             return;
+        //         } else {
+        //             word = word + e.key;
+        //         }
+        //     }
+
+        //     words.forEach(element => {
+        //         const text = element.textContent;
+
+        //         // 2. 필터링 & DOM Update
+        //         if (word == text.slice(0, idx + 1) &&
+        //             idx < text.length) {
+        //             const boldPart = text.slice(0, word.length);
+        //             const restPart = text.slice(word.length);
+
+        //             element.style.display = 'block';
+        //             element.innerHTML = `<strong>${boldPart}</strong>${restPart}`;
+        //         } else {
+        //             element.style.display = 'none';
+        //         }
+        //     });
+
+        //     idx++;
+        // });
+
+        /* 강사님 */
+        // const searchInput = document.getElementById('searchInput');
+        // const items = document.querySelectorAll('#itemList > li');
+
+        // searchInput.addEventListener('keyup', () => {
+        //     const filter = searchInput.value.toLowerCase();
+
+        //     items.forEach((item) => {
+        //         item.style.display =
+        //             item.textContent.toLowerCase().includes(filter) ? '' : 'none';
+        //     })
+        // });
+    </script>
+</body>
+
+</html>
