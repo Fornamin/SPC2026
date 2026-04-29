@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do list</title>
+    <style>
+        .done {
+            text-decoration: line-through;
+        }
+        #itemList div {
+            display: flex;
+            margin-left: 30px;
+        }
+        #itemList li {
+            cursor: pointer;
+            margin: 5px;
+        }
+        #itemList button {
+            margin-left: 80px;
+        }
+    </style>
+</head>
+<body>
+    <p>To-do List</p>
+    <input type="text" id="newItem" placeholder="할 일을 입력하세요">
+    <button id="addBtn">Add</button>
+    <ui id="itemList">
+        <!-- 할 일이 추가 되는 곳 -->
+    </ui>
+    <script>
+        const itemList = document.getElementById('itemList');
+
+        // to-do 추가
+        function addItem() {
+            const addBtn = document.getElementById('addBtn');
+            const input = document.getElementById('newItem');
+            const itemDiv = document.createElement('div');
+            const item = document.createElement('li');
+            // item.innerHTML = `${input} <button>Delete</button>;
+            const itemBtn = document.createElement('button');
+
+            item.textContent = input.value;
+            itemBtn.textContent = 'Delete';
+
+            itemDiv.append(item);
+            itemDiv.appendChild(itemBtn);
+            itemList.appendChild(itemDiv);
+
+            item.addEventListener('click', () => {
+                item.classList.toggle('done');
+            });
+
+            // 버튼을 통해 to-do 삭제
+            itemBtn.addEventListener('click', () => {
+                itemList.removeChild(itemDiv);
+            })
+
+            input.textContent.value = ''; 
+        }
+        
+        // 버튼을 통해 to-do 입력
+        addBtn.addEventListener('click', () => {
+            addItem();
+        });
+
+        // Enter로도 to-do 입력
+        document.getElementById('newItem').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') addItem();
+        });
+    </script>
+</body>
+</html>

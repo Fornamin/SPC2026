@@ -92,6 +92,7 @@
     <div class="stopwatch-box">
         <p id="date">your stopwatch</p>
         <p id="stopwatch-time">00:00:00</p>
+        <!-- <button id="mode">Dark Mode</button> -->
         <div class="btn-group">
             <button id="startBtn">Start</button>
             <button id="stopBtn">Stop</button>
@@ -108,6 +109,21 @@
         let min = 0;
         let sec = 0;
         let msec = 0;
+
+        startBtn.addEventListener('click', startTimer);
+        stopBtn.addEventListener('click', () => {
+            clearInterval(timerId);
+            startBtn.disabled = false;
+        });
+        resetBtn.addEventListener('click', () => {
+            clearInterval(timerId);
+            min = 0; msec = 0; sec = 0;
+            updateTimer();
+        });
+        // document.getElementById('mode').addEventListener('click', () => {
+        //     document.body.style.backgroundColor = '#222';
+        //     document.getElementsByTagNameNS('p').style.color = '#f5f5f5';
+        // })
 
         function startTimer() {
             startBtn.disabled = true;
@@ -126,17 +142,6 @@
                 msec += 10;
             }, 10);
         }
-
-        startBtn.addEventListener('click', startTimer);
-        stopBtn.addEventListener('click', () => {
-            clearInterval(timerId);
-            startBtn.disabled = false;
-        });
-        resetBtn.addEventListener('click', () => {
-            clearInterval(timerId);
-            min = 0; msec = 0; sec = 0;
-            updateTimer();
-        });
 
         function updateTimer() {
             const pMin = min.toString().padStart(2, '0');
