@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            margin: 30px;
+            border: solid 1px black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="aniCanvas" width="600px" height="300px"></canvas>
+    <script>
+        const canvas = document.getElementById('aniCanvas');
+        const context = canvas.getContext('2d');
+
+        let x = 0;
+        let y = 50;
+
+        function draw() {
+            context.clearRect(0, 0, 600, 300);
+
+            context.fillStyle = '#ff0000';
+            context.fillRect(x, y, 50, 50);
+
+            x += 5;
+
+            if (x > 600)
+                x = 0;
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    </script>
+</body>
+</html>

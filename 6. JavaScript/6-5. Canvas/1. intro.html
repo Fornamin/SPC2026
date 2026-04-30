@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: solid 1px black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="300"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const context = canvas.getContext('2d');
+
+        // Rect
+        context.fillStyle = '#FF0000';
+        context.fillRect(100, 50, 200, 100);        
+        context.fillStyle = '#0000FF';
+        context.fillRect(100, 150, 200, 100);
+
+        // Line
+        context.strokeStyle = '#00ff00';
+        context.lineWidth = 4;
+        context.beginPath();
+
+        context.moveTo(200, 250); // start point
+        context.lineTo(300, 150); // end point
+
+        context.moveTo(100, 150);
+        context.lineTo(200, 50);
+
+        context.moveTo(200, 50);
+        context.lineTo(300, 150);  
+
+        context.moveTo(100, 150);
+        context.lineTo(200, 250);
+
+        context.stroke();
+        context.closePath();
+
+        // Circle
+        context.fillStyle = '#ffff00';
+        context.beginPath();
+        context.arc(400, 100, 30, 0, 2 * Math.PI); // x, y, radius, 출발 각도, 끝 각도
+        context.fill();
+        context.closePath();
+
+        context.fillStyle = '#0f0f0f';
+        context.beginPath();
+        context.arc(400, 200, 30, 1/2 * Math.PI, 3/2 * Math.PI); // x, y, radius, 출발 각도, 끝 각도
+        context.fill();
+        context.closePath();
+
+        // 0 radian은 오른쪽에서 출발하고 1/2 PI radian은 90도
+        // PI radian은 180도 3/2 PI radian은 270도
+        // 2 파이 라디언은 360도
+    </script>
+</body>
+</html>

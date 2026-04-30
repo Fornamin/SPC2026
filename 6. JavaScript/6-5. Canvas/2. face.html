@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="300"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const context = canvas.getContext('2d');
+
+        context.beginPath();
+        context.arc(75, 75, 50, 0, Math.PI * 2);
+        context.moveTo(65, 65);
+        context.arc(60, 65, 5, 0, Math.PI * 2); // left eye
+        context.moveTo(95, 65);
+        context.arc(90, 65, 5, 0, Math.PI * 2); // right eye
+        context.moveTo(110,75 )
+        context.arc(75, 75, 35, 0, Math.PI);
+
+        context.stroke();
+        context.closePath();
+
+        // pack-man2
+        context.beginPath();
+        startAngle = (1 / 6) * Math.PI;
+        endAngle = (2 * Math.PI) - (1 / 6 * Math.PI);
+
+        context.moveTo(300, 225);
+        context.arc(300, 225, 50, startAngle, endAngle);
+        context.lineTo(300, 225);
+
+        context.fillStyle = 'yellow';
+        context.fill();
+
+        context.stroke();
+        context.closePath();
+
+        // pack-man
+        let x = 300;
+        let y = 75;
+
+        function drawPackman() {
+            // 초기화
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.beginPath();
+            context.moveTo(x, y);
+
+            let startAngle = (1 / 4) * Math.PI;
+            let endAngle = (2 * Math.PI) - (1 / 4 * Math.PI);
+
+            context.arc(x, y, 50, startAngle, endAngle);
+            context.lineTo(x, y);
+
+            context.fillStyle = 'yellow';
+            context.fill();
+
+            context.stroke();
+            context.closePath();
+
+            requestAnimationFrame(drawPackman);
+        }
+
+        // pack-man move
+        document.body.addEventListener('keydown', (e) => {
+            switch (e.key) {
+                case 'ArrowLeft':
+                    x -= 3;
+                    break;
+                case 'ArrowRight':
+                    x += 3;
+                    break;
+                case 'ArrowUp':
+                    y -= 3;
+                    break;
+                case 'ArrowDown':
+                    y += 3;
+                    break;
+            }
+        });
+
+        drawPackman();
+    </script>
+</body>
+</html>
