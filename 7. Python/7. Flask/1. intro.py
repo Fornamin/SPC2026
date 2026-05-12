@@ -1,0 +1,35 @@
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return '''
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <style>
+            .my-content {
+                width: 300px;
+                height: 200px;
+                border: 5px solid blue;
+                padding: 10px; /* 안쪽 */
+                margin: 20px; /* 바깥쪽 */
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Box Model</h1>
+        <h2>Element: Content, Padding, Border, Margin</h2>
+        <div class="my-content">
+            <p>content</p>
+            <p>width: 300px, height: 200px, border: 5px, padding: 10px, margin: 20px</p>
+        </div>
+        
+    </body>
+    </html>
+    '''
+
+if __name__ == '__main__':
+    app.run()
