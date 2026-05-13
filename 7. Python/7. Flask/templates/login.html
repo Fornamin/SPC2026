@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <p>Hello, {{ name }}</p>
+
+    <h1>Upload Photo</h1>
+    <h4>Upload photo</h4>
+    
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="photo">
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
