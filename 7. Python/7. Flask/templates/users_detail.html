@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+</head>
+<body>
+    <h1>User List</h1>
+    <ul> <!-- template용 언어 -> jinja2 -->
+        {% for user in users %}
+        <li>User Name: {{ user['name'] }}</li>
+        <ul>
+            <li>User Age: {{ user['age'] }}</li>
+            <li>User Phone-Number: {{ user['phone'] }}</li>
+        </ul>
+        {% endfor %}
+    </ul>
+</body>
+</html>
