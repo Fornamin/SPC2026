@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+</head>
+<body>
+    <h1>User List</h1>
+        {% for user in users %}
+        <li><a href="/user/{{ user['id'] }}">{{ user['id'] }}번 회원</a></li>
+        <ul>
+            <li>Name: {{ user['name'] }} / Email: {{ user['email'] }}</li>
+        </ul>
+        {% endfor %}
+    </ul>
+</body>
+</html>
