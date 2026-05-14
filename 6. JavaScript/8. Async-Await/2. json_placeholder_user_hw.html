@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>외부 Req Test</h1>
+    <input type="number" id="uid"></input>
+    <button id="loadBtn">Search</button>
+    <div class="" id="result"><!-- result --></div>
+    <script>
+        const input = document.getElementById('uid');
+
+        function printUser(data) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                    <h4>${data.name}</h4>
+                    <ul>
+                        <li>${data.username}</li>
+                        <li>${data.email}</li>
+                        <li>${data.address.city}</li></ul>
+                `;
+        }
+        
+        document.getElementById('loadBtn').addEventListener('click', async () => {
+            try {
+                const res = await fetch(`https://jsonplaceholder.typicode.com/users/${input.value}`);
+                const data = await res.json();
+                printUser(data);
+            } catch (e) { console.log(e); }
+        });
+    </script>
+</body>
+
+</html>
