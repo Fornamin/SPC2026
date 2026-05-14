@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>외부 Req Test</h1>
+    <button id="loadBtn">Data Req</button>
+    <div class="" id="result"><!-- result --></div>
+    <script>
+        document.getElementById('loadBtn').addEventListener('click', () => {
+            fetch('http://localhost:5000/api/data').then((res) => {
+                if (!res.ok) {
+                    console.log('success: ', res);
+                }
+                return res.json();
+            }).then((data) => {
+                console.log('parsed data: ', data);
+            }).catch((e) => {
+                console.log('parsing error');
+            })
+            console.log('click');
+        });
+    </script>
+</body>
+</html>

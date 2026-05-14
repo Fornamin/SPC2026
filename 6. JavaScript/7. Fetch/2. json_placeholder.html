@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>외부 Req Test</h1>
+    <button id="loadBtn">Data Req</button>
+    <div class="" id="result"><!-- result --></div>
+    <script>
+        document.getElementById('loadBtn').addEventListener('click', () => {
+            fetch('https://jsonplaceholder.typicode.com/todos/1').then((res) => {
+                if (res.status != 200) {
+                    console.log('res: ', res);
+                }
+
+                return res.json();
+            }).then((data) => {
+                // 받아온 data를 DOM에 렌더링
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `
+                    <p>Id ${data.id} Title ${data.title} content ${data.content}
+                `;
+                console.log('parsed data: ', data);
+            }).catch((e) => {
+                console.log('parsing error');
+            })});
+    </script>
+</body>
+</html>
