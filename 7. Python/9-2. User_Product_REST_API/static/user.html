@@ -16,7 +16,7 @@
             ev.preventDefault();
 
             const id = document.getElementById('id').value;
-            fetch(`/user/${id}`).then(res => {
+            fetch(`/api/user/${id}`).then(res => {
                 res.json()
                 console.log("success");
             })

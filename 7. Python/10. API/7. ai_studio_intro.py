@@ -1,0 +1,12 @@
+# Old Version
+import os
+from dotenv import load_dotenv
+import google.generativeai as genai
+
+load_dotenv()
+
+API_KEY = os.getenv('GEMINI_API_KEY')
+genai.configure(api_key=API_KEY)
+model = genai.GenerativeModel('gemini-2.5-flash')
+res = model.generate_content('파이썬이 뭐야')
+print(res.text)

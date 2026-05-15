@@ -36,7 +36,6 @@ def home():
 
 # API 라우팅
 @app.route('/api/user/<id>')
-@app.route('/user/<id>')
 def search_users():
     result = []
     for u in users:
@@ -44,7 +43,7 @@ def search_users():
             result.append(users[u])
     return jsonify(result)
 
-@app.route('/product')
+@app.route('/api/product')
 def search_products():
     id = request.args.get('pid')
     name = request.args.get('pname')

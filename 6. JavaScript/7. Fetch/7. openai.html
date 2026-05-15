@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="prompt" type="text" placeholder="Enter your question">
+    <button id="sendBtn">Send</button>
+    <div class="" id="result"></div>
+</body>
+<script>
+    document.getElementById("sendBtn").addEventListener('click', () => {
+        fetch("https://api.openai.com/v1/models", {
+            headers: {
+                "Authorization": `Bearer _API_KEY`
+            }})
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            document.getElementById("result").innerHTML = `${JSON.stringify(data)}`
+        })
+    })
+</script>
+</html>
