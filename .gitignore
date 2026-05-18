@@ -1,3 +1,8 @@
 .vscode
 .env
-/uploads
+
+# 업로드 파일
+uploads/
+
+# 세션 임시 정보
+.sessions/

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}My Product{% endblock %}
+
+{% block content %}
+<h1>Here is for product</h1>
+<p>product page</p>
+<ul>
+    <li><a href = '{{ url_for("product.detail_page") }}'>Apple</a></li>
+</ul>
+{% endblock %}
