@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Profile</h2>
+    <p>
+    {{ user['name'] }}님<br>ID: {{ user['id'] }}<br>PW: {{ user['pw'] }}  
+    </p>
+
+    <h4>Change Password</h4>
+    <form method="post">
+        <input type="password" id="userPw" name="userPw">
+        <input type="submit" value="change">
+    </form>
+    {% if msg %}
+    <p style="color: red;">
+        {{ msg }}
+    </p>
+    {% endif %}
+    <div class="">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Log-out</a>
+    </div>
+</body>
+</html>

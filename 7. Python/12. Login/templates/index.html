@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Login</h1>
+    {% if user %}
+        <h2>Hello {{user.name}}</h2>
+    {% else %}
+        <form method="POST">
+            <input id="userId" name="userId" type="text" placeholder="Enter your id">
+            <input id="userPw" name="userPw" type="password" placeholder="Enter your password">
+            <input type="submit" value="login">
+        </form>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+    {% endif %}
+</body>
+
+</html>
