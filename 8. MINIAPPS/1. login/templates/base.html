@@ -1,0 +1,39 @@
+{% block content %}
+<!-- Flash Msg-->
+{% with messages = get_flashed_messages() %}
+    {% if message %}
+        {% for msg in messages %}
+            <p>{{ msg }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<!-- 본문 -->
+{% if session.user %}
+    <p>Hello, {{ session.user }}</p>
+{% else %}
+    <p>You should login</p>
+{% endif %}
+
+{% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        {% if 'user' in session %}
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Log-out</a>
+            <a href="{{ url_for('delete') }}">Delete Account</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+        {% endif %}
+    </nav>
+</body>
+</html>

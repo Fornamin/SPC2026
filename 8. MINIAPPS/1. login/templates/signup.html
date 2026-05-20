@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        {% if 'user' in session %}
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Log-out</a>
+            <a href="{{ url_for('delete') }}">Delete Account</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+        {% endif %}
+    </nav>
+    {% block content %}
+    <!-- Flash Msg-->
+    {% with messages = get_flashed_messages() %}
+    {% if message %}
+    {% for msg in messages %}
+    <p>{{ msg }}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% endblock %}
+
+    <form method="POST">
+        <label for="userId">User Id</label>
+        <input type="text" id="userId" name="userId">
+        <label for="userPw">User Password</label>
+        <input type="password" id="userPw" name="userPw">
+        <label for="userEmail">User Email</label>
+        <input type="text" id="userEmail" name="userEmail">
+        <button type="submit">Sign in</button>
+    </form>
+</body>
+</html>
