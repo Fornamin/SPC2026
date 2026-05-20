@@ -13,7 +13,7 @@ class User(db.Model):
     # Flask나 SQLAlchemy와는 무관
     # 파이썬 클래스를 출력할 때 출력 포맷을 커스텀해서 정의
     def __repr__(self):
-        return f'<User {self.id}, {self.name}, {self.age}'
+        return f'<User {self.id}> {self.name}, {self.age}'
     
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'my-secret-key'
