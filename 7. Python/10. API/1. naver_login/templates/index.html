@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naver Login</title>
+</head>
+
+<body>
+    <h1>Login</h1>
+    {% if user %}
+    <h2>Hello, {{user.nickname}}</h2>
+        {% if user.name %}
+        <p>Your name is {{user.name}}</p>
+        {% endif %}
+        {% if user.gender %}
+        <p>Your gender is {{user.gender}}</p>
+        {% endif %}
+        {% if user.mobile %}
+        <p>Your mobile is {{user.mobile}}</p>
+        {% endif %}
+        {% if user.birthday %}
+        <p>Your birthday is {{user.birthday}}</p>
+        {% endif %}
+        <a href="{{ url_for('logout') }}">Log-out</a>
+    {%else %}
+    <a href="{{ url_for('naver_login') }}"><img
+            src="https://blog.kakaocdn.net/dna/cwZEfP/btr1dmtXLv7/AAAAAAAAAAAAAAAAAAAAAImEHxkThl5YaIHu9znh45eMQmN_8hIXLgWPX6nO-lLF/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1780239599&allow_ip=&allow_referer=&signature=Uo6MCibZ9MM%2BDV3Hg7BFZ9naEiQ%3D"
+            width="50">Naver Login</a>
+    {% endif %}
+</body>
+
+</html>
