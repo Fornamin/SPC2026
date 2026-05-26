@@ -1,0 +1,78 @@
+/* 기본 리셋 및 폰트 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 헤더 영역 */
+h1 {
+    text-align: center;
+    padding: 2.5rem 1rem 1.5rem 1rem;
+    color: #1e3a8a; /* 신뢰감을 주는 네이비 블루 */
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* 네비게이션 바 */
+nav {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease-in-out;
+}
+
+/* 마우스 호버 효과 */
+nav ul li a:hover {
+    background-color: #eff6ff;
+    color: #2563eb;
+}
+
+/* 메인 콘텐츠 영역 (block content가 들어갈 자리) */
+main, .content-container {
+    flex: 1;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem 1.5rem;
+}
+
+/* 푸터 영역 */
+footer {
+    background-color: #1e293b;
+    color: #94a3b8;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    margin-top: auto;
+    font-size: 0.9rem;
+}

@@ -1,5 +1,39 @@
 {% extends 'base.html' %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/curriculum.css') }}">
+{% endblock %}
 {% block content %}
-<h2>{{ grade }}학년 - {{ curriculum_title }}</h2>
-<!--채팅창 박스 넣고 대화하도록-->
+<div class="chat-container">
+    <h2>{{ grade }}학년 - {{ curriculum_title }}</h2>
+    <p class="chat-subtitle">AI 튜터와 함께 영어로 대화하며 연습해보세요!</p>
+
+    <div class="chat-box" id="chatBox">
+        <div class="message bot">
+            <div class="avatar">🤖</div>
+            <div class="message-content">
+                Hello! 🌟 Ready to practice your English today? input your message below!
+            </div>
+        </div>
+
+        <!-- 유저 메시지 예시 -->
+        <div class="message user">
+            <div class="message-content">
+                Hi! I want to study English with you.
+            </div>
+        </div>
+    </div>
+
+    <form id="chatform" class="chat-input-area" onsubmit="return false;">
+        <input type="text" id="userInput" placeholder="영어 문장을 입력하거나 질문해보세요..." autocomplete="off">
+        <button type="submit" id="sendBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.53 60.53 0 0 0 19.836-10.107a.75.75 0 0 0 0-1.148A60.53 60.53 0 0 0 3.478 2.404Z" />
+            </svg>
+        </button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 {% endblock %}

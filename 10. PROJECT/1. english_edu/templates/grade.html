@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/grade.css') }}">
+{% endblock %}
+
 {% block content %}
-<h2>{{ grade }}학년 커리큘럼</h2>
-<ul>
-    {% for idx, curriculum in curriculums %}
-        <li><a href="{{ url_for('curriculum', grade=grade, curriculum_id=idx)}}">{{curriculum}}</a></li>
-    {% endfor %}
+<div class="curriculum-container">
+    <h2>{{ grade }}학년 커리큘럼</h2>
+    
+    <ul class="curriculum-list">
+        {% for idx, curriculum in curriculums %}
+            <li>
+                <a href="{{ url_for('curriculum', grade=grade, curriculum_id=idx) }}">
+                    {{ curriculum }}
+                </a>
+            </li>
+        {% endfor %}
     </ul>
+</div>
 {% endblock %}

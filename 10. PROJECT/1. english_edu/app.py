@@ -1,6 +1,19 @@
-from flask import Flask, render_template
+import os
+
+from dotenv import load_dotenv
+from flask import Flask, render_template, request, Response
+import json
+
+import openai
+
+load_dotenv()
+
+openai_api_key = os.getenv("OPENAI_API_KEY")
+
+client = openai.OpenAI(api_key=openai_api_key)
 
 app = Flask(__name__)
+chat_history = []
 
 curriculums = {
     1: ['기초 인사', '간단한 문장', '동물 이름'],
@@ -29,13 +42,49 @@ def curriculum(grade, curriculum_id):
         return render_template('curriculum.html', grade=grade, grades=curriculums.keys(), curriculum_title=curriculum_title)
     return '해당 커리큘럼은 존재하지 않습니다', 404
 
+@app.route('/chat', methods=['POST'])
+def chat(): 
+    message = request.json.get('message', '')
+    baseURI = request.json.get('baseURI', '')
+    parsedURI = baseURI.split('/')  
+    
+    grade = parsedURI[4]
+    curriculum_title = curriculums[int(grade)][int(parsedURI[6])]
+        
+    prompt = f'''
+    당신은 친절한 영어 선생님입니다.
+    학생은 대한민국 초등학교 {grade}학년 학생입니다.
+    대화의 주제는 {curriculum_title}이며 주제에 벗어나면 주제로 돌아오도록 대화를 이끌어주세요.
+    학생이 이해하기 어려운 단어나 표현이 나오면 친절하게 설명해주세요.
+    한국어를 사용하지 말고 영어로만 대답해주세요.'''
+
+    chat_history.append({
+            "role": "user",
+            "content": message
+    })
+
+    def generate_response():
+        reply = ''
+        res = client.chat.completions.create(
+            model='gpt-4o-mini',
+            messages=[{'role': 'system', 'content': prompt}] + chat_history[-10:],
+            stream=True
+        )
+        for chunk in res:
+            content = chunk.choices[0].delta.content
+            if content:
+                reply += content
+                yield f'data: {json.dumps({'content': content}, ensure_ascii=False)}\n\n'
+        
+        chat_history.append({
+            "role": "system",
+            "content": reply
+        })
+
+        yield 'data: [DONE]\n\n'
+
+    return Response(generate_response(), mimetype='text/event-stream')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
-
-# 1. openai 관련 라이브러리 불러오기
-# 2-1. 최종 페이지에서 채팅창 fe 생성(커리큘럼)
-# 2-2. 그 폼의 입력값을 post로 보내서 백엔드에서 chatgpt api호출
-# 3-1. api 호출해서 대화
-# 3-2. 응답을 받아서 다시 프론트엔드에 반환
-# 4. 실제로 이제 영어로 대화를 하도록
-# + 메모리를 통해서 대화 내용 기억하게, sse

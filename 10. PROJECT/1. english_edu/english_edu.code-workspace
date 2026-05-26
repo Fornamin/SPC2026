@@ -1,0 +1,17 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "python.defaultInterpreterPath": "C:\\ProgramData\\anaconda3\\envs\\spc2026\\python.exe",
+        "python.pythonPath": "C:\\ProgramData\\anaconda3\\envs\\spc2026\\python.exe",
+        "python.condaPath": "C:\\ProgramData\\anaconda3\\Scripts\\conda.exe",
+        "python.terminal.activateEnvironment": true,
+        "[python]": {
+            "editor.defaultFormatter": "ms-python.python",
+            "editor.formatOnSave": true
+        }
+    }
+}

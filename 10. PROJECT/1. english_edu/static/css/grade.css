@@ -1,0 +1,84 @@
+/* ==========================================================================
+   학년별 커리큘럼 목록 페이지 스타일 (grade.css)
+   ========================================================================== */
+
+/* 제목 스타일 및 하단 강조선 */
+h2 {
+    color: #1e3a8a;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 4px;
+    background-color: #2563eb;
+    border-radius: 2px;
+}
+
+.curriculum-container {
+    max-width: 1000px;  /* 최대 너비 제한 */
+    width: 100%;        /* 모바일 대응 */
+    margin: 0 auto;     /* 💡 좌우 마진을 자동으로 계산해 가운데 정렬 */
+    padding: 2rem;      /* 안쪽 여백 */
+}
+
+/* 커리큘럼 그리드 레이아웃 (반응형 카드 배열) */
+ul.curriculum-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+/* 카드 아이템 기본 스타일 */
+.curriculum-list li {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+    overflow: hidden;
+}
+
+/* 카드 마우스 호버 효과 (살짝 들리는 애니메이션) */
+.curriculum-list li:hover {
+    transform: translateY(-4px);
+    border-color: #2563eb;
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.1), 0 4px 6px -4px rgba(37, 99, 235, 0.1);
+}
+
+/* 카드 내부 링크 영역 (영역 전체 클릭 가능) */
+.curriculum-list li a {
+    display: block;
+    padding: 1.25rem 1.5rem;
+    color: #374151;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* 아이템 텍스트 앞의 이모지 아이콘 정의 */
+.curriculum-list li a::before {
+    content: '📝';
+    margin-right: 0.75rem;
+    font-size: 1.2rem;
+}
+
+/* 호버 시 텍스트 색상 변경 */
+.curriculum-list li:hover a {
+    color: #2563eb;
+}
