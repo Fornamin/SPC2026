@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Socket Test</title>
+</head>
+<body>
+    <h1>Web Socket Test</h1>
+    <input type="text" id="msg" placeholder="Enter a message...">
+    <button id="sendBtn">send</button>
+    <script>
+        // 여기서 ws는 스킴(scheme) ex. mailto, ftp
+        const socket = new WebSocket('ws://localhost:8000');
+        socket.onopen = () => { // 익명 함수
+            console.log('connected to the server');
+        }
+        
+        socket.onmessage = (event) => {
+            console.log('Server message: ', event.data);
+        }
+
+        document.getElementById('sendBtn').addEventListener('click', () => {
+            const msg = document.getElementById('msg').value;
+            socket.send(msg);
+        });
+    </script>
+</body>
+</html>

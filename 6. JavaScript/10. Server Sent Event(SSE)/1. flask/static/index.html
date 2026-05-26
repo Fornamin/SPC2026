@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Socket Test</title>
+</head>
+<body>
+    <h1>Web Socket Test</h1>
+    <input type="text" id="msg" placeholder="Enter a message...">
+    <button id="sendBtn">send</button>
+    <hr>
+    <div id="reply" class="">
+    </div>
+    <script>
+        // 응답 출력
+        const reply = document.getElementById('reply');
+
+        // 메시지를 받는 API
+        const source = new EventSource('/stream'); // SSE를 듣기 시작
+        
+        source.onopen = () => {
+            console.log('connected to server - start to listen SSE');
+        }
+
+        source.onmessage = (event) => {
+            console.log('server msg: ', event.data);
+
+            const newReply = document.createElement('div');
+            newReply.textContent = event.data;
+            reply.appendChild(newReply);
+        }
+
+        // 메시지를 보내는 API
+        document.getElementById('sendBtn').addEventListener('click', () => {
+            const msg = document.getElementById('msg').value;
+            fetch('/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'msg=' + encodeURIComponent(msg) // form으로 전달
+            })
+        });
+    </script>
+</body>
+</html>
