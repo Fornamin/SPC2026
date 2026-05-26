@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket IO</title>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>Socket IO</h1>
+    <input type="text" id="message" placeholder="Enter a message...">
+    <button id="sendBtn">send</button>
+    <ul id="message_list"></ul>
+    <script>
+        // 수신 기능 
+        const socket = io();
+        socket.on('connect', () => {
+            console.log('connected to the server');
+        });
+        socket.on('message', (msg) => {
+            const li = document.createElement('li');
+            li.appendChild(document.createTextNode(msg));
+            document.getElementById('message_list').appendChild(li);
+        });
+
+        // 송신 기능
+        document.getElementById('sendBtn').addEventListener('click', () => {
+            const msg = document.getElementById('message').value;
+            const id = 'min';
+            socket.send(msg, id);
+            document.getElementById('message').value = '';
+        });
+    </script>
+</body>
+</html>
