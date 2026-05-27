@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPC Shopping</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+            background: #f7f8fa;
+            color: #111;
+        }
+
+        /* 헤더 느낌 */
+        h1 {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin: 0;
+            padding: 18px 24px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* 네비 */
+        nav {
+            display: flex;
+            gap: 12px;
+            padding: 10px 24px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+
+        nav a {
+            font-size: 13px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: #111;
+        }
+
+        /* 전체 레이아웃 */
+        .container {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 20px;
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 16px;
+        }
+
+        /* 상품 카드 */
+        .product-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px;
+            border: 1px solid #eee;
+        }
+
+        /* 이미지 */
+        .product-image {
+            width: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        /* 리뷰 패널 */
+        .review-panel {
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #eee;
+        }
+
+        /* 타이틀 */
+        .review-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        /* AI 요약 (한국 쇼핑몰 스타일 포인트 박스) */
+        #ai-summary {
+            background: #f1f6ff;
+            border: 1px solid #dbe7ff;
+            color: #1a3d8f;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 14px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        /* 리뷰 작성 영역 */
+        .review-form {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+        }
+
+        .rating-box p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .rating-box label {
+            font-size: 13px;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        /* textarea */
+        textarea {
+            width: 100%;
+            height: 80px;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 13px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        textarea:focus {
+            border-color: #2f6fff;
+            box-shadow: 0 0 0 3px rgba(47, 111, 255, 0.1);
+        }
+
+        /* 버튼 (핵심 스타일) */
+        button {
+            margin-top: 10px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #2f6fff;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #1f55d6;
+        }
+
+        /* 리뷰 카드 */
+        .review-item {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            transition: 0.15s;
+        }
+
+        .review-item:hover {
+            border-color: #d6d6d6;
+            transform: translateY(-1px);
+        }
+
+        .review-rating {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ff7a00;
+            margin-bottom: 6px;
+        }
+
+        .review-comment {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #222;
+            white-space: pre-wrap;
+        }
+
+        /* 번역 버튼 (작게 보조 버튼 느낌) */
+        .review-item button {
+            margin-top: 10px;
+            width: auto;
+            padding: 6px 10px;
+            font-size: 12px;
+            background: #f2f3f5;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .review-item button:hover {
+            background: #e9ecf1;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 24px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* h1 기존 padding 제거 */
+        h1 {
+            font-size: 20px;
+            font-weight: 800;
+            margin: 0;
+            padding: 0;
+            background: none;
+            border: none;
+        }
+
+        /* nav 오른쪽 정렬 */
+        nav {
+            display: flex;
+            gap: 14px;
+        }
+
+        nav a {
+            font-size: 13px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: #111;
+        }
+
+        /* 반응형 */
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="top-bar">
+        <h1>SPC Shopping</h1>
+
+        <nav>
+            <a href="http://127.0.0.1:5000/">한국어</a>
+            <a href="http://127.0.0.1:5000/en">English</a>
+            <a href="http://127.0.0.1:5000/jp">日本語</a>
+        </nav>
+    </header>
+    <div class="container">
+
+        <!-- LEFT -->
+        <div class="product-card">
+            <img class="product-image" src="https://picsum.photos/800/500">
+
+            <div class="review-form">
+                <h3>리뷰 작성</h3>
+
+                <div class="rating-box">
+                    <label><input type="radio" name="rating" value="1">⭐1</label>
+                    <label><input type="radio" name="rating" value="2">⭐2</label>
+                    <label><input type="radio" name="rating" value="3">⭐3</label>
+                    <label><input type="radio" name="rating" value="4">⭐4</label>
+                    <label><input type="radio" name="rating" value="5">⭐5</label>
+                </div>
+
+                <textarea id="comment" placeholder="상품 사용 후기를 남겨주세요"></textarea>
+                <button id="send-btn">리뷰 등록</button>
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="review-panel">
+
+            <div class="review-title">리뷰 & AI 요약</div>
+
+            <div id="ai-summary">
+                <strong>AI 요약</strong>
+                <p>아직 리뷰가 없습니다</p>
+                <p>평균 별점: N/A</p>
+            </div>
+
+            <div id="review-container"></div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const LANG = window.location.pathname.split('/')[1];
+
+        function getRating() {
+            const checked = document.querySelector('input[name="rating"]:checked');
+            return checked ? checked.value : null;
+        }
+
+        function appendReview(msg) {
+            const container = document.getElementById('review-container');
+
+            const div = document.createElement('div');
+            div.className = "review-item";
+
+            div.innerHTML = `
+            <div class="review-rating">⭐ ${msg.rating}/5</div>
+            <div class="review-comment">${msg.comment}</div>
+            <button id='translate-btn'>번역</button>
+        `;
+
+            container.prepend(div);
+        }
+
+        async function getAiSummary() {
+            const res = await fetch('/api/ai-summary');
+            const data = await res.json();
+
+            document.getElementById('ai-summary').innerHTML = `
+            <strong>AI 요약</strong>
+            <p>${data.message}</p>
+            <p>평균 별점: ${data.total_rating}</p>
+        `;
+        }
+
+        async function getReviews() {
+            const res = await fetch('/api/reviews');
+            const data = await res.json();
+
+            if (Array.isArray(data)) {
+                data.forEach(r => appendReview(r));
+                getAiSummary();
+            }
+        }
+
+        document.getElementById('review-container').addEventListener('click', async (event) => {
+            if (event.target.tagName == 'BUTTON') {
+                let message = event.target.parentElement.querySelector('.review-comment');
+                const res = await fetch('/api/translate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 'message': message.innerText })
+                });
+                const data = await res.json();
+                message.innerText = data.translated_message;
+                event.target.disabled = true;
+            }
+        });
+
+        document.getElementById('send-btn').addEventListener('click', async () => {
+            const rating = getRating();
+            const comment = document.getElementById('comment').value;
+
+            if (!rating || !comment) {
+                alert("평점과 리뷰를 입력하세요");
+                return;
+            }
+
+            const res = await fetch('/api/reviews', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ rating, comment })
+            });
+
+            const data = await res.json();
+            appendReview(data);
+            getAiSummary();
+
+            document.getElementById('comment').value = "";
+        });
+
+        document.addEventListener('DOMContentLoaded', getReviews);
+    </script>
+
+</body>
+
+</html>

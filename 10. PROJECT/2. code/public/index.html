@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코드 취약점 분석기</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1,
+        h2 {
+            color: #222;
+        }
+
+        form {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #checkbox-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #2d6cdf;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1f4fbf;
+        }
+
+        #code,
+        #result {
+            background: #1e1e1e;
+            color: #eee;
+            padding: 15px;
+            border-radius: 10px;
+            min-height: 150px;
+            overflow-x: auto;
+            white-space: pre;
+            /* ⭐ 줄바꿈 유지 */
+            font-family: monospace;
+        }
+
+        /* 줄번호 스타일 */
+        .code-line {
+            display: flex;
+        }
+
+        .line-number {
+            width: 40px;
+            text-align: right;
+            padding-right: 10px;
+            color: #888;
+            user-select: none;
+        }
+
+        .line-content {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>코드 취약점 분석기</h1>
+    <form id="container">
+        <input type="text" id="code-link" name="code-link" placeholder="github 링크를 입력하세요"></textarea>
+        <div id="checkbox-container">
+            <input type="checkbox" id="personal-info" name="personal-info" />
+            <label for="personal-info">민감한 정보(개인 정보)</label>
+            <input type="checkbox" id="sql-injection" name="sql-injection" />
+            <label for="sql-injection">SQL Injection</label>
+            <input type="checkbox" id="xss" name="xss" />
+            <label for="xss">XSS</label>
+        </div>
+        <button type="submit">분석 시작</button>
+    </form>
+    <h2>소스 코드</h2>
+    <div id="code"></div>
+    <h2>분석 결과</h2>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('container').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const personal_info = document.getElementById('personal-info').checked;
+            const sql_injection = document.getElementById('sql-injection').checked;
+            const xss = document.getElementById('xss').checked;
+
+
+            const code_link = document.getElementById('code-link');
+            const res = await fetch('/api/codecheck', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    code_link: code_link.value,
+                    option: {
+                        personal_info: personal_info,
+                        sql_injection: sql_injection,
+                        xss: xss
+                    }
+                })
+            }
+            );
+            const data = await res.json();
+            appendCodeMsg(data.code);
+            appendResultMsg(data.result);
+        });
+
+        function appendResultMsg(msg) {
+            const result = document.getElementById('result');
+            result.innerHTML = marked.parse(msg);
+            result.scrollTop = result.scrollHeight;
+        }
+
+        function appendCodeMsg(msg) {
+            const code = document.getElementById('code');
+
+            const lines = msg.split('\n');
+
+            code.innerHTML = lines.map((line, i) => {
+                return `
+            <div class="code-line">
+                <div class="line-number">${i + 1}</div>
+                <div class="line-content">${escapeHtml(line)}</div>
+            </div>
+        `;
+            }).join('');
+
+            code.scrollTop = code.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+
+</html>
