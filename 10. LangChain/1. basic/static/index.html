@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPC 작명소</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <h1>회사 이름 생성기</h1>
+    <input type="text" id="userInput" placeholder="회사의 상품명을 입력하세요">
+    <button id="sendBtn">이름 생성</button>
+    <h2>결과</h2>
+    <ul id="resultList"></ul>
+    <script>
+        document.getElementById('sendBtn').addEventListener('click', async (e) => {
+            const input = document.getElementById('userInput');
+            const res = await fetch('/api/name', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 'product': input.value })
+            });
+            const data = await res.json();
+            const result = document.getElementById('resultList');
+            result.innerHTML = marked.parse(data.chatbot)
+        });
+    </script>
+</body>
+
+</html>
