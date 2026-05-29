@@ -1,4 +1,8 @@
-from flask import Flask, render_template, jsonify, redirect
+from flask import (
+    Flask, render_template, 
+    jsonify, redirect, url_for,
+    session
+)
 
 app = Flask(__name__)
 
@@ -15,4 +19,7 @@ def login():
 @app.route('/logout')
 def logout():
     # 세션 삭제
-    return redirect(main)
+    return redirect(url_for('main'))
+
+if __name__ == '__main__':
+    app.run(debug=True)
