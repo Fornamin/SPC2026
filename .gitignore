@@ -12,6 +12,10 @@ uploads/
 # 세션 임시 정보
 .sessions/
 
+# File
+*.json
+*.csv
+
 # Database
 *.db
 *.sqlite
