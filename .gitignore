@@ -1,13 +1,15 @@
 # 개발 환경 파일
 *.pyc
-
+instance/
 .vscode
+.sessions
 
 # 민감 정보
 .env
 
 # 업로드 파일
 uploads/
+file/
 
 # 세션 임시 정보
 .sessions/
@@ -15,6 +17,8 @@ uploads/
 # File
 *.json
 *.csv
+*.pdf
+*.txt
 
 # Database
 *.db
