@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>RAG 챗봇</h1>
+    <div>
+        <div>
+            <h2>PDF 업로드</h2>
+            <form id="upload-form" enctype="multipart/form-data" method="POST" action="/upload">
+                <input type="file" id="file-input" accept=".pdf" name="file-input">
+                <button id="upload-btn" type="submit">업로드</button>
+            </form>
+        </div>
+        <div>
+            <h2>질문하기</h2>
+            <form id="ask-form">
+                <input type="text" id="question-input" placeholder="질문을 입력하세요">
+                <button id="ask-btn" type="submit">질문</button>
+            </form>
+            <div id="answer"></div>
+        </div>
+    </div>
+    <script>
+        // 1. "업로드" 버튼을 통해서 문서 전송한다 (fetch('/upload') -> 결과 받아서 성공/실패 여부 출력)
+        document.getElementById('upload-form').addEventListener('submit', async (e) => {
+            const res = await fetch('/upload');
+            const data = await res.json();
+            if (data.msg == 200)
+                alert('업로드 성공');
+            else alert ('업로드 실패');
+        })
+        // 2. "질문" 버튼을 통해서 질문 한다 (fetch('/ask') -> 결과 받아서 아래 div 에 답변 출력)
+        document.getElementById('ask-form').addEventListener('submit', async (e) => {
+            const res = await fetch('/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+            }});
+            const data = await res.json();
+            console.log(data);
+        })
+    </script>
+</body>
+</html>
