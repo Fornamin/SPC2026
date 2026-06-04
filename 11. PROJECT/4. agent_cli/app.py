@@ -21,18 +21,16 @@ SYSTEM = '''
 def ask(question: str):
     llm = ChatOpenAI(model="gpt-4o-mini")
     agent = create_agent(llm, TOOLS)
-    print(f"[QUESTION] {question}")
     result = agent.invoke({
         "messages": [
             SystemMessage(content=SYSTEM),
             HumanMessage(content=question),
         ]
     })
-    final_answer = result["messages"][-1].content
-    print(f"[RESULT] {final_answer}\n")
-    return final_answer
-            
 
+    print(f"[QUESTION] {question}")
+    print(f"[RESULT] {result["messages"][-1].content}\n")
+            
 if __name__ == '__main__':
     print('=== Demo Command ===')
     questions = [
